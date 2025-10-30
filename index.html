@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send to Discord</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    input, textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    button {
+      background: dodgerblue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: deepskyblue;
+    }
+  </style>
+</head>
+<body>
+  <h2>Send Message to Discord</h2>
+  <input id="username" type="text" placeholder="Your name">
+  <textarea id="message" placeholder="Your message"></textarea>
+  <button onclick="sendToDiscord()">Send</button>
+
+  <script>
+    async function sendToDiscord() {
+      const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // 🔹 Replace this
+      const username = document.getElementById("username").value || "Anonymous";
+      const message = document.getElementById("message").value;
+
+      if (!message) {
+        alert("Please enter a message before sending.");
+        return;
+      }
+
+      const payload = {
+        username: username,
+        content: message
+      };
+
+      try {
+        await fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        alert("✅ Message sent to Discord!");
+      } catch (error) {
+        alert("❌ Error sending message.");
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
